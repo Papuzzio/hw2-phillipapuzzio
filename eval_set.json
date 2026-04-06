@@ -1,1 +1,51 @@
-[]
+[
+  {
+    "id": 1,
+    "type": "normal",
+    "label": "Standard phishing report from employee",
+    "input": "From: jsmith@company.com\nSubject: Suspicious email received\n\nHi Security Team,\n\nI received an email from 'IT-Support@c0mpany-helpdesk.com' asking me to reset my password by clicking a link. The link goes to http://c0mpany-helpdesk.com/reset. I did NOT click the link. The email had the company logo but the sender address looks wrong. Please advise.\n\nThanks,\nJohn Smith\nAccounting Department",
+    "expected_behavior": "Should classify as Medium or High severity. Should recognize the spoofed domain as a phishing indicator. Should recommend blocking the sender domain and checking if other employees received the same email. Drafted reply should thank John for not clicking and confirm the team is investigating."
+  },
+  {
+    "id": 2,
+    "type": "normal",
+    "label": "Automated SIEM alert for brute force login attempts",
+    "input": "ALERT [SIEM-4421]: Multiple failed login attempts detected\nTimestamp: 2026-04-06T03:22:00Z\nSource IP: 203.0.113.47\nTarget: VPN Gateway (vpn.company.com)\nDetails: 847 failed SSH login attempts against user 'admin' in the past 15 minutes. Source IP geolocated to a known Tor exit node. No successful logins detected.",
+    "expected_behavior": "Should classify as High severity due to volume and Tor exit node origin. Should recommend immediately blocking the source IP at the firewall and verifying no successful authentication occurred. No reporter reply needed since this is an automated alert, but the system should note that."
+  },
+  {
+    "id": 3,
+    "type": "normal",
+    "label": "Employee reports lost corporate laptop",
+    "input": "From: maria.garcia@company.com\nSubject: Lost laptop\n\nHi,\n\nI think I left my work laptop in an Uber last night. It's a Dell Latitude 5540, asset tag COMP-2847. It has full disk encryption enabled and I use a fingerprint to log in. I've already contacted Uber support but haven't heard back. What should I do?\n\nMaria Garcia\nMarketing",
+    "expected_behavior": "Should classify as Medium severity since the device has encryption. Should recommend initiating a remote wipe, disabling the device's VPN/network certificates, and resetting Maria's credentials as precautions. Drafted reply should reassure Maria, outline next steps, and ask whether any sensitive files were stored locally outside of encrypted company tools."
+  },
+  {
+    "id": 4,
+    "type": "edge_case",
+    "label": "Vague report with almost no actionable detail",
+    "input": "From: temps@company.com\nSubject: something weird\n\nHey, my computer is acting weird. It was slow today and a window popped up for a second then went away. Not sure if it matters.\n\n- Dave",
+    "expected_behavior": "Should classify as Low severity but explicitly flag that there is insufficient information to rule out a real threat. Should NOT dismiss it outright. Should recommend asking Dave follow-up questions: what application was the popup, what time it occurred, which workstation, and whether anything was downloaded recently. Drafted reply should acknowledge the report and ask those clarifying questions without alarming Dave."
+  },
+  {
+    "id": 5,
+    "type": "edge_case",
+    "label": "Alert containing mixed signals — internal IP doing external scanning",
+    "input": "ALERT [NDR-0098]: Anomalous outbound traffic detected\nTimestamp: 2026-04-05T14:05:33Z\nSource: 10.10.5.22 (workstation assigned to: R&D Lab)\nDestination: Multiple external IPs on ports 445, 3389, 8080\nDetails: Host has initiated connection attempts to 312 unique external IPs in the past hour. Traffic pattern resembles port scanning. Host is part of the R&D lab VLAN which has authorized penetration testing tools installed.",
+    "expected_behavior": "Should classify as High severity initially, but explicitly flag the ambiguity: the R&D lab is authorized for pen testing, so this could be legitimate activity. Should recommend verifying with the R&D team whether a sanctioned test is in progress before taking containment action. Should NOT automatically downgrade severity based on the pen testing note alone — the system should flag this for mandatory human review."
+  },
+  {
+    "id": 6,
+    "type": "likely_failure",
+    "label": "Sophisticated social engineering with plausible internal context",
+    "input": "From: cto@company.com\nSubject: Urgent - Wire transfer needed\n\nHi Security Team,\n\nI'm forwarding this to you before acting on it. I received an email from what appears to be our CEO (david.chen@company.com) asking me to authorize an emergency wire transfer of $148,000 to a vendor for a 'confidential acquisition.' The email references our Q2 board meeting by name and mentions our actual legal counsel by name. The email headers show it came from our internal mail server. I'm suspicious because David usually calls me for anything this sensitive.\n\nCan you verify this is legitimate?\n\nRegards,\nSarah Lin, CTO",
+    "expected_behavior": "This is a business email compromise (BEC) scenario designed to be hard to classify. The system should classify as Critical severity. The system should NOT conclude the email is safe just because it references real internal details or appears to come from the internal mail server — these are hallmarks of sophisticated BEC or compromised accounts. Should recommend immediate steps: do not authorize the transfer, verify directly with the CEO via a separate channel (phone call), check email headers for spoofing indicators, and investigate whether the CEO's account may be compromised. The system must flag this for mandatory human review and should not express high confidence either way."
+  },
+  {
+    "id": 7,
+    "type": "likely_failure",
+    "label": "Alert in a foreign language with technical jargon",
+    "input": "ALERTA [FW-7733]: Tráfico sospechoso detectado\nMarca de tiempo: 2026-04-06T08:15:00Z\nOrigen: 192.168.12.45 (servidor de base de datos de producción)\nDestino: 45.33.32.156 (externo)\nDetalles: Se detectó una conexión saliente persistente en el puerto 443 con un volumen de transferencia de 4.7GB en las últimas 2 horas. El certificado TLS del destino no coincide con ningún servicio autorizado. El servidor normalmente no inicia conexiones salientes.",
+    "expected_behavior": "The system may struggle with non-English input. A good response should still process the alert correctly — this describes a production database server exfiltrating 4.7GB of data to an unauthorized external IP, which is a Critical severity event indicating possible data exfiltration. Should recommend immediately isolating the database server from the network and beginning forensic analysis. The system should not produce a lower-quality or vague response just because the input is in Spanish. If the system cannot process the language reliably, it must flag the entire alert for human review rather than guessing."
+  }
+]
