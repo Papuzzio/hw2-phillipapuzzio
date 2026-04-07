@@ -1,0 +1,10 @@
+From: jsmith@company.com
+Subject: Suspicious email received
+
+Hi Security Team,
+
+I received an email from 'IT-Support@c0mpany-helpdesk.com' asking me to reset my password by clicking a link. The link goes to http://c0mpany-helpdesk.com/reset. I did NOT click the link. The email had the company logo but the sender address looks wrong. Please advise.
+
+Thanks,
+John Smith
+Accounting Department
