@@ -1,5 +1,9 @@
 # HW2 - Phillip Apuzzio
 
+## Walkthrough Video
+
+[https://youtu.be/HGDccfyJqlk](https://youtu.be/HGDccfyJqlk)
+
 ## Workflow: Security Alert Triage and Response Drafting
 
 ### Who the User Is
