@@ -1,0 +1,5 @@
+ALERTA [FW-7733]: Tráfico sospechoso detectado
+Marca de tiempo: 2026-04-06T08:15:00Z
+Origen: 192.168.12.45 (servidor de base de datos de producción)
+Destino: 45.33.32.156 (externo)
+Detalles: Se detectó una conexión saliente persistente en el puerto 443 con un volumen de transferencia de 4.7GB en las últimas 2 horas. El certificado TLS del destino no coincide con ningún servicio autorizado. El servidor normalmente no inicia conexiones salientes.

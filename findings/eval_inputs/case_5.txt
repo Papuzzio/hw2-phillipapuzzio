@@ -1,0 +1,5 @@
+ALERT [NDR-0098]: Anomalous outbound traffic detected
+Timestamp: 2026-04-05T14:05:33Z
+Source: 10.10.5.22 (workstation assigned to: R&D Lab)
+Destination: Multiple external IPs on ports 445, 3389, 8080
+Details: Host has initiated connection attempts to 312 unique external IPs in the past hour. Traffic pattern resembles port scanning. Host is part of the R&D lab VLAN which has authorized penetration testing tools installed.

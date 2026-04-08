@@ -1,0 +1,11 @@
+From: cto@company.com
+Subject: Urgent - Wire transfer needed
+
+Hi Security Team,
+
+I'm forwarding this to you before acting on it. I received an email from what appears to be our CEO (david.chen@company.com) asking me to authorize an emergency wire transfer of $148,000 to a vendor for a 'confidential acquisition.' The email references our Q2 board meeting by name and mentions our actual legal counsel by name. The email headers show it came from our internal mail server. I'm suspicious because David usually calls me for anything this sensitive.
+
+Can you verify this is legitimate?
+
+Regards,
+Sarah Lin, CTO

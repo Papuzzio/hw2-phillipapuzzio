@@ -1,0 +1,5 @@
+ALERT [SIEM-4421]: Multiple failed login attempts detected
+Timestamp: 2026-04-06T03:22:00Z
+Source IP: 203.0.113.47
+Target: VPN Gateway (vpn.company.com)
+Details: 847 failed SSH login attempts against user 'admin' in the past 15 minutes. Source IP geolocated to a known Tor exit node. No successful logins detected.
